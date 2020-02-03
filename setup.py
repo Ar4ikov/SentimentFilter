@@ -15,7 +15,7 @@ class SentimentSetup:
         setup(
             name="sentiment_filter",
             version=self.__version__,
-            install_requires=["tensorflow", "pandas", "nltk"],
+            install_requires=["tensorflow", "pandas", "nltk", "numpy"],
             packages=[self.package],
             include_package_data=True,
             package_data={self.package: ["*.txt", "*.json", "*.h5", "model/*"]},

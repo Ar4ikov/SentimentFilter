@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/mini_data/negative.csv" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/negative.txt" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/negative_1.csv" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/pediki.html" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/pediki_1.html" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/phrases/neg.txt" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/phrases/pos.txt" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/readme.md" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/the_what.txt" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/tweets_data/negative.csv" charset="windows-1251" />
+    <file url="file://$PROJECT_DIR$/tweets_data/positive.csv" charset="windows-1251" />
+  </component>
+</project>

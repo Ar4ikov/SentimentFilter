@@ -19,8 +19,17 @@ class SentimentFilter:
         # Loading vocabulary
         self.dataset.load_vocab(self.dataset.default_vocab_path)
 
+    def get_vector(self, data, seq_length=100):
+        regex = self.dataset.to_regex(data)
+        size = [self.dataset.get_to_stem(x) for x in regex]
+
+        vector = self.dataset.to_embedding_dim(data, self.dataset.tokens,
+                                               len(size) if seq_length < len(size) else seq_length)
+
+        return vector
+
     def is_negative(self, data, score=0.67, seq_length=100):
-        vector = self.dataset.to_embedding_dim(data, self.dataset.tokens, seq_length)
+        vector = self.get_vector(data, seq_length)
 
         response = self.network.predict(vector, seq_length=seq_length)
 
@@ -30,7 +39,7 @@ class SentimentFilter:
             return False
 
     def is_positive(self, data, score=0.45, seq_length=100):
-        vector = self.dataset.to_embedding_dim(data, self.dataset.tokens, seq_length)
+        vector = self.get_vector(data, seq_length)
 
         response = self.network.predict(vector, seq_length=seq_length)
 
@@ -43,7 +52,7 @@ class SentimentFilter:
         if scores is None:
             scores = [0.45, 0.67]
 
-        vector = self.dataset.to_embedding_dim(data, self.dataset.tokens, seq_length)
+        vector = self.get_vector(data, seq_length)
 
         response = self.network.predict(vector, seq_length=seq_length)
 
@@ -56,10 +65,7 @@ class SentimentFilter:
         if scores is None:
             scores = [0.45, 0.67]
 
-        regex = self.dataset.to_regex(data)
-        size = [self.dataset.get_to_stem(x) for x in regex]
-
-        vector = self.dataset.to_embedding_dim(data, self.dataset.tokens, len(size) if seq_length < len(size) else seq_length)
+        vector = self.get_vector(data, seq_length)
 
         response = self.network.predict(vector, seq_length=seq_length)
 

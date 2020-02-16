@@ -99,4 +99,28 @@ sentiment.get_analysis(text, scores=[0.1, 0.26])
 # Response: {'result': <Sentiment.NEGATIVE: 'negative'>, 'score': 0.274}
 ```
 
+### 4. Сервер на flask для работы веб-сервисов.
+**- ПРРРР, для запуска стоит установить `flask`**<br>
+```bash
+root@ar4ikov:~# pip install flask
+```
+
+Далее, в самом начале файла `request_server.py` вы найдете 3 константы
+```python
+# ... some code ...
+
+DEBUG = False
+HOST = "localhost"
+PORT = 80
+
+# ... some code ...
+```
+
+Измените их под себя (DEBUG лично я бы советовал не трогать). 
+
+Дальше - запуск!
+```bash
+root@ar4ikov: /home/user/SentimentFilter# python request_server.py
+```
+
 Больше примеров работы (и с другими классами) вы найдете в **`examples`**!

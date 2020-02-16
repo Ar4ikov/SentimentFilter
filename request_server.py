@@ -17,14 +17,14 @@ class SentimentServer(Flask):
                          template_folder, instance_path, instance_relative_config, root_path)
 
         self.sentiment = s.SentimentFilter()
+        self.prepare_tensorflow()
+
+    def prepare_tensorflow(self):
+        print("Preparing weights...")
+        print(self.sentiment.get_analysis("Привет!"))
 
     def run(self, host=None, port=None, debug=None, load_dotenv=True, **options):
-        @self.before_first_request
-        def prepare_tensorflow():
-            print("Preparing weights...")
-            print(self.sentiment.get_analysis("Привет!"))
-
-        @self.route("/index", methods=["GET", "POST"])
+        @self.route("/", methods=["GET", "POST"])
         def index():
             return jsonify({
                 "status": True,
@@ -63,7 +63,7 @@ class SentimentServer(Flask):
                 "status": True,
                 "response": {
                     "requested_text": data["text"],
-                    "score": result["score"],
+                    "score": round(float(result["score"]), 4),
                     "type": result["result"].value
                 }
             }), 200

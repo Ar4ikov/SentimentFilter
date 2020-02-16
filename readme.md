@@ -123,4 +123,22 @@ PORT = 80
 root@ar4ikov: /home/user/SentimentFilter# python request_server.py
 ```
 
+Стандартный запрос на
+```http request
+http://localhost:80/get_analysis?text=Привет
+```
+
+Даст ответ
+```json
+{
+  "status":true,
+  "response":
+    {
+      "requested_text": "Привет",
+      "score": 0.301,
+      "type": "positive"
+    }
+}
+```
+
 Больше примеров работы (и с другими классами) вы найдете в **`examples`**!

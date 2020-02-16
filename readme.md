@@ -125,7 +125,7 @@ root@ar4ikov: /home/user/SentimentFilter# python request_server.py
 
 Стандартный запрос на
 ```http request
-http://localhost:80/get_analysis?text=Привет
+POST http://localhost:80/get_analysis?text=Привет
 ```
 
 Даст ответ

@@ -143,4 +143,14 @@ POST http://localhost:80/get_analysis?text=Привет
 }
 ```
 
+5. Сохранение результатов работы нейросети из социальных сетей
+```bash
+root@ar4ikov: /home/user/SentimentFilter/transport/vk# python vk.py
+```
+```bash
+root@ar4ikov: /home/user/SentimentFilter/transport/SOME_FILE# python SOME_FILE.py
+```
+
+В самом файле нужные константы подписаны комментариями, не перепутаете.
+
 Больше примеров работы (и с другими классами) вы найдете в **`examples`**!

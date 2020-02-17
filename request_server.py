@@ -1,12 +1,17 @@
 # | Created by Ar4ikov
 # | Время: 16.02.2020 - 19:56
 
+from ssl import SSLContext
+
 import sentiment_filter as s
 from flask import Flask, request, jsonify
 
 DEBUG = False
 HOST = "localhost"
 PORT = 80
+
+USE_SSL = False
+CERTS = ("/path/to/your/certificate1", "/path/to/your/certificate2")
 
 
 class SentimentServer(Flask):
@@ -71,5 +76,10 @@ class SentimentServer(Flask):
         super().run(host, port, debug, load_dotenv, **options)
 
 
+ssl_context = None
+if USE_SSL:
+    ssl_context = SSLContext()
+    ssl_context.load_cert_chain(*CERTS)
+
 sentiment_server = SentimentServer(__name__)
-sentiment_server.run(host=HOST, port=PORT, debug=DEBUG, threaded=True)
+sentiment_server.run(host=HOST, port=PORT, debug=DEBUG, threaded=True, ssl_context=ssl_context)

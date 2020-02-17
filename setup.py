@@ -3,6 +3,9 @@
 
 from setuptools import setup
 from os import path
+from sys import argv
+
+USE_GPU = True
 
 
 class SentimentSetup:
@@ -11,6 +14,11 @@ class SentimentSetup:
         self.__version__ = open(path.join(path.dirname(__file__), self.package, "version.txt"), "r").read()
         with open("requirements.txt", "r") as file:
             self.reqs = [x.replace("\n", "") for x in file.readlines()]
+
+        if USE_GPU is True:
+            index_ = [(idx, x) for idx, x in enumerate(self.reqs) if "tensorflow" in x]
+            self.reqs[index_[0][0]] = index_[0][1].replace("tensorflow-cpu", "tensorflow-gpu")
+            print("USE_GPU")
 
     def setup(self):
         setup(

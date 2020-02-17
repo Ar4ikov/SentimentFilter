@@ -6,7 +6,7 @@ from os import path
 from time import time
 from sqlite3 import connect as database
 
-from flask import Flask, request
+from flask import Flask, request, send_file
 import sentiment_filter as s
 
 DEBUG = False
@@ -20,6 +20,7 @@ CONFIRMATION_KEY = "your-key"
 # Использования секретного кода для Callback-сервера
 USE_SECRET = True
 SECRET_KEY = "secret_key"
+FILE_KEY = "key"
 
 
 class VkTransport(Flask):
@@ -66,6 +67,18 @@ class VkTransport(Flask):
         def index():
             return "ok", 200
 
+        @self.route("/get", methods=["GET"])
+        def get():
+            data = request.json or request.args.to_dict() or request.form or request.data or {}
+
+            if "file_key" not in data or data.get("file_key") != FILE_KEY:
+                return "ne ok", 500
+
+            file_path = self.database.execute("PRAGMA database_list;").fetchone()[-1]
+            file_name = file_path.split("\\")[-1]
+
+            return send_file(filename_or_fp=file_path, as_attachment=True, attachment_filename=file_name), 200
+
         @self.route("/get_analysis", methods=["GET", "POST"])
         def get_analysis():
             data = request.json or request.args.to_dict() or request.form or request.data or {}
@@ -76,7 +89,7 @@ class VkTransport(Flask):
 
             if USE_SECRET:
                 if "secret_key" not in data or data.get("secret_key") != SECRET_KEY:
-                    return "ne ok"
+                    return "ne ok", 500
 
             if data.get("type") == "wall_reply_new":
                 vk_text = data["object"]["text"]

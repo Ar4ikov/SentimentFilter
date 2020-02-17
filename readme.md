@@ -21,10 +21,12 @@ Sentiment Filter
 ## Работа с библиотекой. 
 
 ### 1. Установка.
-```bash
-root@ar4ikov:~# pip install sentiment_filter
+Перед началом установки, в `setup.py` убедитесь, что вы ставите именно ту версию Tensorflow (CPU или GPU), которая вам нужна
+```python
+USE_GPU = False  # True ->  если вам нужна GPU версия Tensorflow
 ```
-или
+
+А затем выполните установку
 ```bash
 root@ar4ikov: /home/user/SentimentFilter# python setup.py install
 ```

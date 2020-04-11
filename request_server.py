@@ -36,7 +36,7 @@ class SentimentServer(Flask):
                 "message": """Hello, sentiment! <{"result": POSITIVE}>"""
             }), 200
 
-        @self.route("/get_analysis", methods=["GET", "PORT"])
+        @self.route("/get_analysis", methods=["GET", "POST"])
         def get_analysis():
             data = request.args.to_dict() or request.form or request.json or request.data or {}
 

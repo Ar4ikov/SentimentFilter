@@ -10,7 +10,7 @@ from os import path
 from time import time, sleep
 from sqlite3 import connect as database
 
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, jsonify
 import sentiment_filter as s
 
 DEBUG = False

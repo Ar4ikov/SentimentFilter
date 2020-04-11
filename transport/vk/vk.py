@@ -137,7 +137,7 @@ class VkTransport(Flask):
                             self.root.database.execute(
                                 f"""
                                 INSERT INTO {self.root.table_name_} (`vk_user`, `vk_type`, `vk_object_id`, `text`, `vk_group`, `date`, `estimation`, `score`)
-                                VALUES ('{vk_user}', '{vk_type}', '{vk_object_id}', '{vk_text}', '{vk_group}', '{event_time}', '{round(float(result["score"]), 4)}', '{result["result"].value}');
+                                VALUES ('{vk_user}', '{vk_type}', '{vk_object_id}', '{vk_text.replace("'", "")}', '{vk_group}', '{event_time}', '{round(float(result["score"]), 4)}', '{result["result"].value}');
                                 """
                             )
 

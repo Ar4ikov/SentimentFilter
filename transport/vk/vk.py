@@ -165,10 +165,12 @@ class VkTransport(Flask):
             if "file_key" not in data or data.get("file_key") != FILE_KEY:
                 return "ne ok", 500
 
-            file_path = self.database.execute("PRAGMA database_list;").fetchone()[-1]
-            file_name = file_path.split("\\")[-1]
+            if "as_json" in data:
+                return jsonify([_ for _ in self.database.execute(f"SELECT * FROM {self.table_name_}")])
+            else:
+                file_path = self.database.execute("PRAGMA database_list;").fetchone()[-1]
 
-            return send_file(filename_or_fp=file_path, as_attachment=True, attachment_filename=file_name), 200
+                return send_file(filename_or_fp=file_path, as_attachment=True, attachment_filename='vk_data.db'), 200
 
         if USE_POLLING:
             long_poll = self.long_poll()(self)
